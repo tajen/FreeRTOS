@@ -599,9 +599,10 @@ static TlsTransportStatus_t tlsHandshake( NetworkContext_t * pNetworkContext,
     if( returnStatus == TLS_TRANSPORT_SUCCESS )
     {
         /* Perform the TLS handshake. */
-		TickType_t handshakeTimeoutTicks = pdMS_TO_TICKS(ipconfigSOCK_DEFAULT_RECEIVE_BLOCK_TIME);	
-		TimeOut_t handshakeStart;
-		vTaskSetTimeOutState(&handshakeStart);
+        TickType_t handshakeTimeoutTicks = pdMS_TO_TICKS( 10000 );
+        TimeOut_t handshakeStart;
+        vTaskSetTimeOutState( &handshakeStart );
+
         do
         {
             mbedtlsError = mbedtls_ssl_handshake( &( pTlsTransportParams->sslContext.context ) );
