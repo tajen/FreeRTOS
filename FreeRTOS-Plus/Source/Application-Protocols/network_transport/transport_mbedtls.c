@@ -606,9 +606,9 @@ static TlsTransportStatus_t tlsHandshake( NetworkContext_t * pNetworkContext,
         do
         {
             mbedtlsError = mbedtls_ssl_handshake( &( pTlsTransportParams->sslContext.context ) );
-		} while(((mbedtlsError == MBEDTLS_ERR_SSL_WANT_READ) || 
-                 (mbedtlsError == MBEDTLS_ERR_SSL_WANT_WRITE))	&& 
-                 (xTaskCheckForTimeOut(&handshakeStart, &handshakeTimeoutTicks) == pdFALSE));
+        } while( ( ( mbedtlsError == MBEDTLS_ERR_SSL_WANT_READ ) ||
+                   ( mbedtlsError == MBEDTLS_ERR_SSL_WANT_WRITE ) ) &&
+                 ( xTaskCheckForTimeOut( &handshakeStart, &handshakeTimeoutTicks ) == pdFALSE ) );
 
         if( mbedtlsError != 0 )
         {
